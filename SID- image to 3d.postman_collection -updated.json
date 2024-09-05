@@ -1,0 +1,334 @@
+{
+  "info": {
+    "_postman_id": "8adbfc26-14c8-45e8-ac23-19c588a9cb84",
+    "name": "SID- image to 3d",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28801322"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{SID_USERNAME}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{SID_PWD}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text"
+            },
+            {
+              "key": "scope",
+              "value": "data:read data:write",
+              "type": "text"
+            },
+            {
+              "key": "scope",
+              "value": "",
+              "type": "text",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://developer.api.autodesk.com/authentication/v2/token",
+          "protocol": "https",
+          "host": ["developer", "api", "autodesk", "com"],
+          "path": ["authentication", "v2", "token"]
+        },
+        "description": "Generated from cURL: curl -v 'https://developer.api.autodesk.com/authentication/v2/token' \\\r\n    -X 'POST' \\\r\n    -H 'Content-Type: application/x-www-form-urlencoded' \\\r\n    -u '<your_client_id>:<your_client_secret>' \\\r\n    -d 'grant_type=client_credentials' \\\r\n    -d 'scope=data:read' \\\r\n    -d 'scope=data:write'"
+      },
+      "response": []
+    },
+    {
+      "name": "Create Photoscene",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer {{ACCESS_TOKEN}}"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "scenename",
+              "value": "usmantest4",
+              "type": "text"
+            },
+            {
+              "key": "format",
+              "value": "obj,fbx",
+              "type": "text"
+            },
+            {
+              "key": "scenetype",
+              "value": "object",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://developer.api.autodesk.com/photo-to-3d/v1/photoscene?scenename=usmantest3&format=obj,rcs&scenetype=object",
+          "protocol": "https",
+          "host": ["developer", "api", "autodesk", "com"],
+          "path": ["photo-to-3d", "v1", "photoscene"],
+          "query": [
+            {
+              "key": "scenename",
+              "value": "usmantest3"
+            },
+            {
+              "key": "format",
+              "value": "obj,rcs"
+            },
+            {
+              "key": "scenetype",
+              "value": "object"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl -v 'https://developer.api.autodesk.com/photo-to-3d/v1/photoscene'\r\n    -X 'POST'\r\n    -H 'Content-Type: application/json'\r\n    -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsImtpZCI6...'\r\n    -d 'scenename=testscene'\r\n    -d 'format=rcm,ortho'\r\n    -d 'metadata_name[0]=orthogsd'\r\n    -d 'metadata_value[0]=0.1'\r\n    -d 'metadata_name[1]=targetcs'\r\n    -d 'metadata_value[1]=UTM84-32N'"
+      },
+      "response": []
+    },
+    {
+      "name": "Add Images(file)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{ACCESS_TOKEN}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "photosceneid",
+              "value": "{{PHOTOSCENE_ID}}",
+              "type": "text"
+            },
+            {
+              "key": "type",
+              "value": "image",
+              "type": "text"
+            },
+            {
+              "key": "file[0]",
+              "type": "file",
+              "src": "/Users/usman/Downloads/coded/DSC_8936.JPG"
+            },
+            {
+              "key": "file[1]",
+              "type": "file",
+              "src": "/Users/usman/Downloads/coded/DSC_8937.JPG"
+            },
+            {
+              "key": "file[2]",
+              "type": "file",
+              "src": "/Users/usman/Downloads/coded/DSC_8938.JPG"
+            },
+            {
+              "key": "file[3]",
+              "type": "file",
+              "src": "/Users/usman/Downloads/coded/DSC_8939.JPG"
+            },
+            {
+              "key": "file[4]",
+              "type": "file",
+              "src": "/Users/usman/Downloads/coded/DSC_8940.JPG"
+            },
+            {
+              "key": "file[5]",
+              "type": "file",
+              "src": "/Users/usman/Downloads/coded/DSC_8941.JPG"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://developer.api.autodesk.com/photo-to-3d/v1/file",
+          "protocol": "https",
+          "host": ["developer", "api", "autodesk", "com"],
+          "path": ["photo-to-3d", "v1", "file"]
+        },
+        "description": "Generated from cURL: curl -v 'https://developer.api.autodesk.com/photo-to-3d/v1/file'\r\n    -X 'POST'\r\n    -H 'Authorization: Bearer eyjhbGCIOIjIuzI1NiISimtpZCI6...'\r\n    -d \"photosceneid=HCyjCRNHUsNsPII9GlhvE8LrF6LFxS4NHzgQj3ZDWmU\"\r\n    -d \"type=image\"\r\n    -d \"file[0]=http://www.example.com/_MG_9026.jpg\"\r\n    -d \"file[1]=http://www.example.com/_MG_9027.jpg\""
+      },
+      "response": []
+    },
+    {
+      "name": "Initiate Processing",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{ACCESS_TOKEN}}"
+          }
+        ],
+        "url": {
+          "raw": "https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/{{PHOTOSCENE_ID}}",
+          "protocol": "https",
+          "host": ["developer", "api", "autodesk", "com"],
+          "path": ["photo-to-3d", "v1", "photoscene", "{{PHOTOSCENE_ID}}"]
+        },
+        "description": "Generated from cURL: curl -v 'https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/AtAuFsedTdqWdhF9VzHepp5oM9PITiuizI4xdMbz/progress'\r\n    -X 'GET'\r\n    -H 'Authorization: Bearer eyjhbGCIOIjIuzI1NiISimtpZCI6...'"
+      },
+      "response": []
+    },
+    {
+      "name": "Download Mash",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{ACCESS_TOKEN}}"
+          }
+        ],
+        "url": {
+          "raw": "https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/{{PHOTOSCENE_ID}}?format=obj",
+          "protocol": "https",
+          "host": ["developer", "api", "autodesk", "com"],
+          "path": ["photo-to-3d", "v1", "photoscene", "{{PHOTOSCENE_ID}}"],
+          "query": [
+            {
+              "key": "format",
+              "value": "obj"
+            }
+          ]
+        },
+        "description": "Generated from cURL: curl -v 'https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/AtAuFsedTdqWdhF9VzHepp5oM9PITiuizI4xdMbz?format=rcm'\r\n  -X 'GET'\r\n  -H 'Authorization: Bearer eyjhbGCIOIjIuzI1NiISimtpZCI6...'"
+      },
+      "response": []
+    },
+    {
+      "name": "Check Progress",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{ACCESS_TOKEN}}"
+          }
+        ],
+        "url": {
+          "raw": "https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/{{PHOTOSCENE_ID}}/progress",
+          "protocol": "https",
+          "host": ["developer", "api", "autodesk", "com"],
+          "path": [
+            "photo-to-3d",
+            "v1",
+            "photoscene",
+            "{{PHOTOSCENE_ID}}",
+            "progress"
+          ]
+        },
+        "description": "Generated from cURL: curl -v 'https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/AtAuFsedTdqWdhF9VzHepp5oM9PITiuizI4xdMbz/progress'  -X 'GET'  -H 'Authorization: Bearer eyjhbGCIOIjIuzI1NiISimtpZCI6...'\r\n"
+      },
+      "response": []
+    },
+    {
+      "name": "Check Properties",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{ACCESS_TOKEN}}"
+          }
+        ],
+        "url": {
+          "raw": "https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/{{PHOTOSCENE_ID}}/properties",
+          "protocol": "https",
+          "host": ["developer", "api", "autodesk", "com"],
+          "path": [
+            "photo-to-3d",
+            "v1",
+            "photoscene",
+            "{{PHOTOSCENE_ID}}",
+            "properties"
+          ]
+        },
+        "description": "Generated from cURL: curl -X GET https://developer.api.autodesk.com/photo-to-3d/v1/photoscene/$PHOTOSCENEID/properties \\\r\n  -H 'Authorization: Bearer '$TOKEN"
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{ACCESS_TOKEN}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "SID_PWD",
+      "value": "Pwd@12345"
+    },
+    {
+      "key": "SID_USERNAME",
+      "value": "{{SID_USERNAME}}"
+    },
+    {
+      "key": "TOKEN",
+      "value": "Bearer {{ACCESS_TOKEN}}"
+    },
+    {
+      "key": "PHOTOSCENE_ID",
+      "value": "{{PHOTOSCENE_ID}}",
+      "type": "string"
+    }
+  ]
+}
